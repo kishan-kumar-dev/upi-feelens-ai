@@ -1,4 +1,3 @@
-````markdown
 # UPI FeeLens AI
 
 > **Know the fee before you pay.**
@@ -11,6 +10,10 @@ Instead of relying on a single static answer, the application searches the live 
 
 https://upi-feelens-ai.vercel.app/
 
+## 🎥 Demo Video
+
+https://drive.google.com/file/d/1VR1DNinlW8Mx-v32znbqOxCwBqZ0oawR/view?usp=drive_link
+
 ## 💻 GitHub
 
 https://github.com/kishan-kumar-dev/upi-feelens-ai
@@ -21,12 +24,12 @@ https://github.com/kishan-kumar-dev/upi-feelens-ai
 
 UPI payments are widely used, but users can be confused about:
 
-- Whether a UPI transaction has a fee
-- Whether fees are different for customers and merchants
-- Whether transaction amount affects charges
-- Whether payment type affects charges
-- Whether bank, wallet, or payment provider rules are different
-- Which information is current
+* Whether a UPI transaction has a fee
+* Whether fees are different for customers and merchants
+* Whether transaction amount affects charges
+* Whether payment type affects charges
+* Whether bank, wallet, or payment provider rules are different
+* Which information is current
 
 Online information can also come from different sources and may contain different dates, transaction categories, or fee structures.
 
@@ -54,7 +57,7 @@ The AI then explains the information while being instructed not to invent fees o
 
 ### 🔎 Live Web Research
 
-Uses SerpApi to search the web for current UPI fee information.
+Uses SerpApi to search the web for UPI fee information.
 
 ### 🤖 AI-Powered Analysis
 
@@ -90,43 +93,42 @@ Clean and minimal interface focused on one task:
                                │
                                ▼
                     ┌─────────────────────┐
-                    │    Next.js UI       │
-                    │    React + Tailwind │
+                    │     Next.js UI      │
+                    │   React + Tailwind  │
                     └──────────┬──────────┘
                                │
                                ▼
                     ┌─────────────────────┐
-                    │ /api/research       │
-                    │ Next.js API Route   │
+                    │    /api/research    │
+                    │   Next.js API Route │
                     └──────────┬──────────┘
                                │
                                ▼
                     ┌─────────────────────┐
-                    │      SerpApi        │
+                    │       SerpApi       │
                     │    Live Web Search  │
                     └──────────┬──────────┘
                                │
                                ▼
                     ┌─────────────────────┐
-                    │ Retrieved Sources   │
+                    │  Retrieved Sources  │
                     │ Titles + Snippets   │
-                    │ + URLs              │
+                    │    + URLs           │
                     └──────────┬──────────┘
                                │
                                ▼
                     ┌─────────────────────┐
-                    │     Gemini AI       │
-                    │ Evidence Analysis   │
+                    │      Gemini AI      │
+                    │   Evidence Analysis │
                     └──────────┬──────────┘
                                │
                                ▼
                     ┌─────────────────────┐
-                    │  FeeLens Result     │
+                    │    FeeLens Result   │
                     │ Answer + Details    │
-                    │ + Sources           │
+                    │    + Sources        │
                     └─────────────────────┘
 ```
-````
 
 ---
 
@@ -134,35 +136,35 @@ Clean and minimal interface focused on one task:
 
 ### Frontend
 
-- Next.js
-- React
-- TypeScript
-- Tailwind CSS
-- React Markdown
+* Next.js
+* React
+* TypeScript
+* Tailwind CSS
+* React Markdown
 
 ### Backend
 
-- Next.js App Router
-- Next.js API Routes
+* Next.js App Router
+* Next.js API Routes
 
 ### AI
 
-- Google Gemini
-- `@google/genai`
+* Google Gemini
+* `@google/genai`
 
 ### Web Research
 
-- SerpApi
-- Google Search results
+* SerpApi
+* Google Search results
 
 ### Deployment
 
-- Vercel
+* Vercel
 
 ### Version Control
 
-- Git
-- GitHub
+* Git
+* GitHub
 
 ---
 
@@ -170,7 +172,7 @@ Clean and minimal interface focused on one task:
 
 ```text
 upi-feelens-ai/
-│
+
 ├── app/
 │   ├── api/
 │   │   └── research/
@@ -214,28 +216,9 @@ Is there any fee for a ₹5,000 UPI payment?
 
 The application creates multiple research queries related to the user's question.
 
-Example:
-
-```text
-UPI fees charges Is there any fee for a ₹5,000 UPI payment?
-
-UPI transaction charges India Is there any fee for a ₹5,000 UPI payment?
-
-UPI charges NPCI Is there any fee for a ₹5,000 UPI payment?
-
-UPI bank charges Is there any fee for a ₹5,000 UPI payment?
-```
-
 ### Step 3 — SerpApi performs live searches
 
 The application sends the generated queries to SerpApi.
-
-The retrieved results contain information such as:
-
-- Title
-- URL
-- Search snippet
-- Displayed source
 
 ### Step 4 — Duplicate sources are removed
 
@@ -243,18 +226,7 @@ The application combines the search results and removes duplicate URLs.
 
 ### Step 5 — Gemini analyzes the evidence
 
-The retrieved source information is sent to Gemini.
-
-Gemini is instructed to:
-
-- Use only retrieved information
-- Avoid inventing fees
-- Distinguish customer and merchant charges
-- Distinguish transaction types
-- Identify conflicting information
-- Prefer official sources when available
-- Explain uncertainty
-- Provide a verification reminder
+Gemini analyzes the retrieved source information and explains the relevant findings.
 
 ### Step 6 — User receives the result
 
@@ -262,8 +234,11 @@ The application displays:
 
 ```text
 Answer
+
 Details
+
 Sources
+
 Important
 ```
 
@@ -296,8 +271,6 @@ The project `.gitignore` contains:
 .env*
 ```
 
-This keeps API keys out of the public repository.
-
 ---
 
 ## ▶️ Run Locally
@@ -322,7 +295,7 @@ npm install
 
 ### 4. Create `.env.local`
 
-```text
+```env
 GEMINI_API_KEY=your_gemini_api_key
 SERPAPI_KEY=your_serpapi_key
 ```
@@ -343,13 +316,11 @@ http://localhost:3000
 
 ## 🏭 Production Build
 
-To create a production build:
-
 ```bash
 npm run build
 ```
 
-Start the production server with:
+Start the production server:
 
 ```bash
 npm start
@@ -382,18 +353,9 @@ Researches a UPI fee question using SerpApi and Gemini.
 }
 ```
 
-The response contains:
-
-- Original question
-- Generated search queries
-- Retrieved sources
-- AI-generated research explanation
-
 ---
 
 ## 🧪 Example Questions
-
-Try questions such as:
 
 ```text
 Is there any fee for a ₹5,000 UPI payment?
@@ -427,11 +389,11 @@ The AI receives retrieved web evidence before generating the explanation.
 
 The Gemini prompt explicitly tells the model not to invent:
 
-- Fees
-- Percentages
-- Dates
-- Limits
-- Transaction conditions
+* Fees
+* Percentages
+* Dates
+* Limits
+* Transaction conditions
 
 ### Source Transparency
 
@@ -467,20 +429,20 @@ The application does not provide financial advice.
 
 Possible future improvements include:
 
-- Official-source prioritization
-- Better source filtering
-- NPCI and government source verification
-- Source reliability indicators
-- Fee comparison tables
-- Transaction-type filters
-- Bank/payment-provider specific research
-- Historical fee changes
-- Better search query optimization
-- Cached research results
-- User-friendly fee breakdowns
-- Multi-language support
-- Voice-based questions
-- More advanced AI research agents
+* Official-source prioritization
+* Better source filtering
+* NPCI and government source verification
+* Source reliability indicators
+* Fee comparison tables
+* Transaction-type filters
+* Bank/payment-provider specific research
+* Historical fee changes
+* Better search query optimization
+* Cached research results
+* User-friendly fee breakdowns
+* Multi-language support
+* Voice-based questions
+* More advanced AI research agents
 
 ---
 
@@ -524,18 +486,14 @@ Full Stack Developer
 
 GitHub:
 
-[https://github.com/kishan-kumar-dev](https://github.com/kishan-kumar-dev)
+https://github.com/kishan-kumar-dev
 
 Portfolio:
 
-[https://kishan-modi-portfolio.vercel.app/](https://kishan-modi-portfolio.vercel.app/)
+https://kishan-modi-portfolio.vercel.app/
 
 ---
 
 ## 📄 License
 
 This project was created as a hackathon project and demonstration application.
-
-```
-
-```
