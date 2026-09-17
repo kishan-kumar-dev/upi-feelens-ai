@@ -1,36 +1,541 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+````markdown
+# UPI FeeLens AI
 
-## Getting Started
+> **Know the fee before you pay.**
 
-First, run the development server:
+UPI FeeLens AI is an AI-powered research assistant that helps users understand UPI transaction fees and charges.
+
+Instead of relying on a single static answer, the application searches the live web using SerpApi and then uses Gemini AI to analyze the retrieved information and provide a simple explanation with source links.
+
+## 🚀 Live Demo
+
+https://upi-feelens-ai.vercel.app/
+
+## 💻 GitHub
+
+https://github.com/kishan-kumar-dev/upi-feelens-ai
+
+---
+
+## 🎯 Problem
+
+UPI payments are widely used, but users can be confused about:
+
+- Whether a UPI transaction has a fee
+- Whether fees are different for customers and merchants
+- Whether transaction amount affects charges
+- Whether payment type affects charges
+- Whether bank, wallet, or payment provider rules are different
+- Which information is current
+
+Online information can also come from different sources and may contain different dates, transaction categories, or fee structures.
+
+UPI FeeLens AI helps users research these questions quickly.
+
+---
+
+## 💡 Solution
+
+UPI FeeLens AI combines:
+
+1. **Live web research**
+2. **Source collection**
+3. **AI analysis**
+4. **Simple explanations**
+5. **Source transparency**
+
+The application retrieves relevant information from the web and sends the retrieved evidence to Gemini AI.
+
+The AI then explains the information while being instructed not to invent fees or unsupported numbers.
+
+---
+
+## ✨ Features
+
+### 🔎 Live Web Research
+
+Uses SerpApi to search the web for current UPI fee information.
+
+### 🤖 AI-Powered Analysis
+
+Uses Google Gemini to analyze retrieved search results and explain them in simple language.
+
+### 📚 Source Transparency
+
+Displays the sources used for the AI explanation so users can inspect the original information.
+
+### 🧠 Multiple Search Queries
+
+The application generates multiple UPI-focused search queries for better research coverage.
+
+### ⚠️ Conflict Awareness
+
+The AI is instructed to identify conflicting information instead of presenting different fee structures as one universal rule.
+
+### 📱 Simple Interface
+
+Clean and minimal interface focused on one task:
+
+> Ask a UPI fee question and get a researched explanation.
+
+---
+
+## 🏗️ Architecture
+
+```text
+                    ┌─────────────────────┐
+                    │       User          │
+                    │  UPI Fee Question   │
+                    └──────────┬──────────┘
+                               │
+                               ▼
+                    ┌─────────────────────┐
+                    │    Next.js UI       │
+                    │    React + Tailwind │
+                    └──────────┬──────────┘
+                               │
+                               ▼
+                    ┌─────────────────────┐
+                    │ /api/research       │
+                    │ Next.js API Route   │
+                    └──────────┬──────────┘
+                               │
+                               ▼
+                    ┌─────────────────────┐
+                    │      SerpApi        │
+                    │    Live Web Search  │
+                    └──────────┬──────────┘
+                               │
+                               ▼
+                    ┌─────────────────────┐
+                    │ Retrieved Sources   │
+                    │ Titles + Snippets   │
+                    │ + URLs              │
+                    └──────────┬──────────┘
+                               │
+                               ▼
+                    ┌─────────────────────┐
+                    │     Gemini AI       │
+                    │ Evidence Analysis   │
+                    └──────────┬──────────┘
+                               │
+                               ▼
+                    ┌─────────────────────┐
+                    │  FeeLens Result     │
+                    │ Answer + Details    │
+                    │ + Sources           │
+                    └─────────────────────┘
+```
+````
+
+---
+
+## 🛠️ Tech Stack
+
+### Frontend
+
+- Next.js
+- React
+- TypeScript
+- Tailwind CSS
+- React Markdown
+
+### Backend
+
+- Next.js App Router
+- Next.js API Routes
+
+### AI
+
+- Google Gemini
+- `@google/genai`
+
+### Web Research
+
+- SerpApi
+- Google Search results
+
+### Deployment
+
+- Vercel
+
+### Version Control
+
+- Git
+- GitHub
+
+---
+
+## 📁 Project Structure
+
+```text
+upi-feelens-ai/
+│
+├── app/
+│   ├── api/
+│   │   └── research/
+│   │       └── route.ts
+│   │
+│   ├── globals.css
+│   ├── layout.tsx
+│   └── page.tsx
+│
+├── lib/
+│   ├── gemini.ts
+│   ├── queries.ts
+│   └── serpapi.ts
+│
+├── types/
+│   └── research.ts
+│
+├── public/
+│
+├── .env.local
+├── .gitignore
+├── package.json
+├── package-lock.json
+├── tsconfig.json
+└── README.md
+```
+
+---
+
+## 🔄 How It Works
+
+### Step 1 — User asks a question
+
+Example:
+
+```text
+Is there any fee for a ₹5,000 UPI payment?
+```
+
+### Step 2 — Search queries are generated
+
+The application creates multiple research queries related to the user's question.
+
+Example:
+
+```text
+UPI fees charges Is there any fee for a ₹5,000 UPI payment?
+
+UPI transaction charges India Is there any fee for a ₹5,000 UPI payment?
+
+UPI charges NPCI Is there any fee for a ₹5,000 UPI payment?
+
+UPI bank charges Is there any fee for a ₹5,000 UPI payment?
+```
+
+### Step 3 — SerpApi performs live searches
+
+The application sends the generated queries to SerpApi.
+
+The retrieved results contain information such as:
+
+- Title
+- URL
+- Search snippet
+- Displayed source
+
+### Step 4 — Duplicate sources are removed
+
+The application combines the search results and removes duplicate URLs.
+
+### Step 5 — Gemini analyzes the evidence
+
+The retrieved source information is sent to Gemini.
+
+Gemini is instructed to:
+
+- Use only retrieved information
+- Avoid inventing fees
+- Distinguish customer and merchant charges
+- Distinguish transaction types
+- Identify conflicting information
+- Prefer official sources when available
+- Explain uncertainty
+- Provide a verification reminder
+
+### Step 6 — User receives the result
+
+The application displays:
+
+```text
+Answer
+Details
+Sources
+Important
+```
+
+This makes the result easier to understand and verify.
+
+---
+
+## 🔐 Environment Variables
+
+Create a local file:
+
+```text
+.env.local
+```
+
+Add:
+
+```env
+GEMINI_API_KEY=your_gemini_api_key
+SERPAPI_KEY=your_serpapi_key
+```
+
+### Important
+
+Never commit `.env.local` to GitHub.
+
+The project `.gitignore` contains:
+
+```gitignore
+.env*
+```
+
+This keeps API keys out of the public repository.
+
+---
+
+## ▶️ Run Locally
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/kishan-kumar-dev/upi-feelens-ai.git
+```
+
+### 2. Open the project
+
+```bash
+cd upi-feelens-ai
+```
+
+### 3. Install dependencies
+
+```bash
+npm install
+```
+
+### 4. Create `.env.local`
+
+```text
+GEMINI_API_KEY=your_gemini_api_key
+SERPAPI_KEY=your_serpapi_key
+```
+
+### 5. Start the development server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 6. Open the application
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```text
+http://localhost:3000
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## 🏭 Production Build
 
-To learn more about Next.js, take a look at the following resources:
+To create a production build:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+npm run build
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Start the production server with:
 
-## Deploy on Vercel
+```bash
+npm start
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🔌 API
+
+### POST `/api/research`
+
+Researches a UPI fee question using SerpApi and Gemini.
+
+### Request
+
+```json
+{
+  "question": "Is there any fee for a ₹5,000 UPI payment?"
+}
+```
+
+### Response
+
+```json
+{
+  "question": "Is there any fee for a ₹5,000 UPI payment?",
+  "queries": [],
+  "sources": [],
+  "aiSummary": "..."
+}
+```
+
+The response contains:
+
+- Original question
+- Generated search queries
+- Retrieved sources
+- AI-generated research explanation
+
+---
+
+## 🧪 Example Questions
+
+Try questions such as:
+
+```text
+Is there any fee for a ₹5,000 UPI payment?
+```
+
+```text
+Are UPI merchant payments charged?
+```
+
+```text
+Does the customer pay a UPI transaction fee?
+```
+
+```text
+Are UPI payments free for customers?
+```
+
+```text
+Do UPI merchant transactions have charges?
+```
+
+---
+
+## 🧩 Design Principles
+
+### Evidence First
+
+The AI receives retrieved web evidence before generating the explanation.
+
+### No Unsupported Claims
+
+The Gemini prompt explicitly tells the model not to invent:
+
+- Fees
+- Percentages
+- Dates
+- Limits
+- Transaction conditions
+
+### Source Transparency
+
+Users can see the sources used by the research process.
+
+### Clear Uncertainty
+
+If retrieved sources disagree, the application tells the user instead of hiding the disagreement.
+
+### Simple UX
+
+The interface focuses on one primary action:
+
+```text
+Ask → Research → Explain → Verify
+```
+
+---
+
+## ⚠️ Disclaimer
+
+UPI fees and transaction rules can depend on factors such as transaction type, payment method, participant, merchant category, applicable rules, and effective dates.
+
+UPI FeeLens AI is a research and information tool.
+
+The information shown by the application should be verified against the relevant official source before making decisions based on it.
+
+The application does not provide financial advice.
+
+---
+
+## 🔮 Future Improvements
+
+Possible future improvements include:
+
+- Official-source prioritization
+- Better source filtering
+- NPCI and government source verification
+- Source reliability indicators
+- Fee comparison tables
+- Transaction-type filters
+- Bank/payment-provider specific research
+- Historical fee changes
+- Better search query optimization
+- Cached research results
+- User-friendly fee breakdowns
+- Multi-language support
+- Voice-based questions
+- More advanced AI research agents
+
+---
+
+## 🎥 Hackathon Demo Flow
+
+A simple demo can follow this flow:
+
+```text
+1. Introduce UPI FeeLens AI
+
+2. Enter:
+   "Is there any fee for a ₹5,000 UPI payment?"
+
+3. Click:
+   "Check UPI Fees"
+
+4. Show:
+   Live Research
+
+5. Show:
+   AI-generated explanation
+
+6. Scroll to:
+   Sources
+
+7. Explain:
+   The AI uses retrieved evidence and
+   highlights uncertainty or conflicting information.
+
+8. Finish with:
+   "Know the fee before you pay."
+```
+
+---
+
+## 👨‍💻 Author
+
+**Kishan Modi**
+
+Full Stack Developer
+
+GitHub:
+
+[https://github.com/kishan-kumar-dev](https://github.com/kishan-kumar-dev)
+
+Portfolio:
+
+[https://kishan-modi-portfolio.vercel.app/](https://kishan-modi-portfolio.vercel.app/)
+
+---
+
+## 📄 License
+
+This project was created as a hackathon project and demonstration application.
+
+```
+
+```
