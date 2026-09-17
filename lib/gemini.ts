@@ -45,14 +45,14 @@ ${sourceText}
 TASK:
 
 Analyze the retrieved sources and give the user a short,
-clear explanation.
+clear, accurate explanation.
 
 IMPORTANT RULES:
 
 1. Use only information supported by the retrieved sources.
 
-2. Do not invent fees, percentages, dates, limits, rules,
-   or transaction conditions.
+2. Do not invent fees, percentages, dates, limits,
+   transaction conditions, or regulatory requirements.
 
 3. Clearly distinguish between:
    - consumer/customer charges
@@ -62,51 +62,76 @@ IMPORTANT RULES:
    - P2P payments
    - P2M/merchant payments
 
-4. If sources discuss different dates or different fee
+4. Focus only on information directly relevant to the user's
+   question. Do not introduce unrelated UPI features,
+   limits, cash withdrawals, UPI Lite rules, or account
+   restrictions unless they are necessary to answer the
+   question.
+
+5. If sources discuss different dates or different fee
    structures, clearly mention that they may refer to
    different effective dates or transaction categories.
 
-5. Do not combine conflicting numbers as though they are
+6. Do not combine conflicting numbers as though they are
    one current rule.
 
-6. If the retrieved sources conflict or are unclear, say:
+7. If sources conflict or are unclear, say:
    "The retrieved sources are not fully consistent."
 
-7. Prefer official or primary sources when they are present,
-   especially NPCI or government sources.
+8. Prioritize sources in this order:
+   - NPCI
+   - Government sources
+   - Banks and regulated financial institutions
+   - Established payment providers
+   - Reputable news organizations
+   - Other websites
 
-8. News articles and payment-company articles can provide
-   context, but do not treat them as official rules.
+9. Do not treat Facebook, YouTube, social media posts,
+   forums, or user-generated content as authoritative rules.
 
-9. Never claim that a customer must pay a merchant-side fee
-   unless the sources explicitly support that claim.
+10. If an official or primary source is available, use it
+    as the main basis for the explanation.
 
-10. Do not provide financial advice.
+11. If only secondary sources are available, clearly say
+    that the information should be verified with the relevant
+    official source.
 
-11. Keep the answer concise and easy to understand.
+12. Never claim that a customer must pay a merchant-side fee
+    unless the sources explicitly support that claim.
 
-12. Use Markdown headings and bullet points.
+13. Do not provide financial advice.
+
+14. Keep the answer concise and easy to understand.
+
+15. Use Markdown headings and bullet points.
+
+16. Do not repeat the entire source snippets. Summarize the
+    relevant information instead.
+
+17. Do not mention information that does not help answer the
+    user's specific question.
 
 Return exactly these sections:
 
 ## ANSWER
 
-Give the simplest answer to the user's question.
+Give the simplest direct answer to the user's question.
 
 ## DETAILS
 
-Explain the important conditions, transaction types,
-thresholds, dates, or exceptions supported by the sources.
+Explain only the important conditions, transaction types,
+thresholds, dates, or exceptions that are directly relevant
+to the question and supported by the sources.
 
 ## SOURCES
 
-Summarize what the retrieved sources say.
-Mention when sources disagree.
+Briefly summarize what the most relevant retrieved sources
+say. Mention when reliable sources disagree.
 
 ## IMPORTANT
 
-Tell the user what information should be verified
-before relying on the answer.
+Tell the user what information should be verified before
+relying on the answer.
 `;
 
   let response;

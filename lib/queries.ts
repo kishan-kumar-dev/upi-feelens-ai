@@ -1,8 +1,8 @@
 export function buildUPIQueries(question: string): string[] {
   return [
-    `UPI fees charges ${question}`,
+    `site:npci.org.in UPI charges fees ${question}`,
+    `site:gov.in UPI charges fees ${question}`,
+    `site:bank.in UPI transaction charges ${question}`,
     `UPI transaction charges India ${question}`,
-    `UPI charges NPCI ${question}`,
-    `UPI bank charges ${question}`,
   ];
 }
